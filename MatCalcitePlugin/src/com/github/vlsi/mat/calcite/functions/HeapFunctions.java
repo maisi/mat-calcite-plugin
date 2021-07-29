@@ -46,10 +46,6 @@ public class HeapFunctions extends HeapFunctionsBase {
   }
 
   public static String convertEpoch(Object r){
-    HeapReference ref = ensureHeapReference(r);
-    if (ref == null) {
-      return "";
-    }
     long temp =0L;
     try{temp = Long.parseLong(toString(r));}
     catch (NumberFormatException e){
