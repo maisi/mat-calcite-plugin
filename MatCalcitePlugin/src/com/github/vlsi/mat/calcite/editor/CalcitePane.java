@@ -165,6 +165,7 @@ public class CalcitePane extends CompositeHeapEditorPane {
         + "--   this['a.b.c'] -- the same as this['a']['b']['c']\n"
         + "-- Functions:\n"
         + "--   toString(any) returns string representation\n"
+        + "--   convertEpoch(long) returns date time string of epoch time \n"
         + "--   getAddress(any) returns address of referenced object\n"
         + "--   getType(any) returns class name of referenced object\n"
         + "--   shallowSize(any) returns shallow heap size\n"

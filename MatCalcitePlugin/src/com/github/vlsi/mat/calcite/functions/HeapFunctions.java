@@ -13,6 +13,8 @@ import org.eclipse.mat.snapshot.model.IClass;
 import org.eclipse.mat.snapshot.model.IObject;
 import org.eclipse.mat.snapshot.model.PrettyPrinter;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 public class HeapFunctions extends HeapFunctionsBase {
@@ -41,6 +43,21 @@ public class HeapFunctions extends HeapFunctionsBase {
       return null;
     }
     return r.toString();
+  }
+
+  public static String convertEpoch(Object r){
+    HeapReference ref = ensureHeapReference(r);
+    if (ref == null) {
+      return "";
+    }
+    long temp =0L;
+    try{temp = Long.parseLong(toString(r));}
+    catch (NumberFormatException e){
+      return "Wrong type";
+    }
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+    return sdf.format(new Date(temp));
   }
 
   @SuppressWarnings("unused")
