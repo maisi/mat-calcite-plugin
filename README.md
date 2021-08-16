@@ -145,6 +145,7 @@ Heap schema
     getByKey     | extracts value for given string representation of key for referenced map
     getField     | obtains value of field with specified name for referenced object
     getStringContent | pretty prints object representation
+    convertEpoch | returns date time string of epoch time
 
  The following table functions are supported:
 
