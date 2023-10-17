@@ -17,7 +17,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>29.0-jre</version>
+            <version>32.0.0-jre</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
@@ -31,7 +31,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.1</version>
+                <version>5.1.9</version>
                 <extensions>true</extensions>
                 <configuration>
                     <manifestLocation>META-INF</manifestLocation>
@@ -74,7 +74,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.apache.felix</groupId>
                                         <artifactId>maven-bundle-plugin</artifactId>
-                                        <versionRange>5.1.1</versionRange>
+                                        <versionRange>5.1.9</versionRange>
                                         <goals>
                                             <goal>bundle</goal>
                                         </goals>
@@ -89,7 +89,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.apache.felix</groupId>
                                         <artifactId>maven-bundle-plugin</artifactId>
-                                        <versionRange>5.1.1</versionRange>
+                                        <versionRange>5.1.9</versionRange>
                                         <goals>
                                             <goal>manifest</goal>
                                         </goals>
