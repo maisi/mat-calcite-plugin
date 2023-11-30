@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/vlsi/mat-calcite-plugin.svg?branch=master)](https://travis-ci.org/vlsi/mat-calcite-plugin)
+[![Build Status](https://github.com/vlsi/mat-calcite-plugin/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/vlsi/mat-calcite-plugin/actions/workflows/main.yml)
 
 MAT Calcite plugin
 ==================
@@ -16,15 +16,17 @@ See [Calcite SQL reference](https://calcite.apache.org/docs/reference.html)
 Installation
 ------------
 
-Requirements: Java 1.8+, Eclipse Memory Analyzer 1.8.0+
+Requirements: Java 17+, Eclipse Memory Analyzer 0.14.0+
 
-TL;DR: use the following update repository to install the latest released version: https://dl.bintray.com/vlsi/eclipse/updates/
+There are two update channels:
+ * https://vlsi.github.io/mat-calcite-plugin-update-site/stable (stable releases)
+ * https://vlsi.github.io/mat-calcite-plugin-update-site/ea (early access, per-commit releases)
 
 To install Calcite SQL plugin, perform the following:
 1. Open `Help`, `Install New Software...`
 1. Click `Add`, it will open a `Add Repository` window
-1. Type `Calcite SQL plugin site` to the `Name` field
-1. Type `https://dl.bintray.com/vlsi/eclipse/updates/` to the `Location` field
+1. Type `Calcite SQL plugin stable releases` to the `Name` field
+1. Type `https://vlsi.github.io/mat-calcite-plugin-update-site/stable/` to the `Location` field
 1. Click `Ok`
 1. All the checkboxes can be left by default (`Show only latest version`, `Group items by category`, ...)
 1. Check `SQL for Memory Analyzer` category
@@ -36,7 +38,7 @@ To install Calcite SQL plugin, perform the following:
 Early access versions
 ---------------------
 
-Development builds are pushed to https://dl.bintray.com/vlsi/eclipse-test/updates/ repository,
+Development builds are pushed to https://vlsi.github.io/mat-calcite-plugin-update-site/ea/ repository,
 so you can preview the upcoming version right after the commit lands to the default branch.
 
 Sample
@@ -230,9 +232,9 @@ from
 
 Requirements
 ------------
-Java 1.8 as a build JDK. The code should still be Java 1.7 compatible.
-Memory Analyzer Tool 1.5 or higher
-
+Java 17 as a build JDK.
+The code can use all Java 17 features.
+Eclipse Memory Analyzer 0.14.0 or higher
 
 Building
 --------
@@ -241,25 +243,13 @@ Eclipse plugin cannot depend on jars from maven repository.
 It has to be a OSGi bundle, however Calcite is easier to reach via maven.
 So we use two-phase approach: bundle the dependencies in a single jar, then use this jar in eclipse project.
 
-1. Build dependencies.jar
+1. Build the plugin
 
     ```
-    cd MatCalciteDependencies
-    mvn install
+    ./mvnw install # from the top-level folder
     ```
 
-    This will create a jar with all the dependencies in `dependencies/target` folder.
-    You do not need to touch/move/copy the jar.
-
-2. Build the plugin
-
-    ```
-    mvn install # from the top-level folder
-    ```
-
-    Note: this will copy `MatCalciteDependencies` to `MatCalcitePlugin/MatCalcitePlugin/target/dependency` so Eclipse can find it.
-
-    The final repository (aka "update site") with the plugin will be created in `eclipse-repository/target/eclipse-repository-1.0.0-SNAPSHOT.zip`
+    The final repository (aka "update site") with the plugin will be created in `MatCalciteRepository/target/MatCalciteRepository-....zip`
 
 
 Running

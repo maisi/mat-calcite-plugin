@@ -1,5 +1,22 @@
 ## [Unreleased]
 
+## [1.6.2] - 2023-11-17
+### Fixed
+- Fixed java.lang.IllegalArgumentException: Illegal group reference when explain plan has table names with dollars
+
+## [1.6.1] - 2023-11-15
+### Fixed
+- Fixed java.lang.NoClassDefFoundError: org/apache/calcite/runtime/CalciteContextException when SQL fails in MAT UI (regression since 1.6.0)
+
+## [1.6.0] - 2023-11-15
+### Changed
+- Eclipse Memory Analyzer 1.14.0 or higher is required
+- Java 17 is required
+- Update Apache Calcite to 1.36.0 (see https://calcite.apache.org/news/2023/11/10/release-1.36.0/)
+- Update Guava to 32.1.3-jre
+- Update net.minidev:accessors-smart to 2.5.0
+- Update net.minidev:json-smart to 2.5.0
+
 ## [1.5.0] - 2020-10-12
 ### Added
 - Extra property for all objects: `@class` (references to `java.lang.Class`)

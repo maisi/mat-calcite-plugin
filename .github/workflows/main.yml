@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - '**'
+      - main
   pull_request:
     branches:
       - '**'
@@ -19,30 +19,24 @@ jobs:
   build-test:
     strategy:
       matrix:
-        java: [ 8 ]
+        java: [ 17 ]
         os: [ ubuntu-latest, windows-latest ]
     name: 'Test, ${{ matrix.os }}, java ${{ matrix.java }}'
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v3
-      - name: Cache local Maven repository
-        uses: actions/cache@v3
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: ./.github/actions/setup_java
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      - name: 'Set up JDK ${{ matrix.java }}'
-        uses: actions/setup-java@v3
+          java_version: ${{ matrix.java }}
+      - name: Build
+        uses: ./.github/actions/build
         with:
-          distribution: zulu
-          java-version: ${{ matrix.java }}
-      - name: Build MatCalciteDependencies
-        run: |
-          cd MatCalciteDependencies
-          mvn --color=always -B install
-      - name: Test
-        run: |
-          mvn --color=always -B verify
-
+          java_version: ${{ matrix.java }}
+      - name: Publish Eclipse update site
+        if: runner.os == 'Linux' && github.repository == 'vlsi/mat-calcite-plugin' && github.ref == 'refs/heads/main'
+        uses: ./.github/actions/publish-update-site
+        with:
+          update_site_token:
+            ${{ secrets.UPDATE_SITE_TOKEN }}
