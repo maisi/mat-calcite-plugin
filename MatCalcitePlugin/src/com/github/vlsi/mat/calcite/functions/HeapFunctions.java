@@ -11,6 +11,8 @@ import org.eclipse.mat.snapshot.ISnapshot;
 import org.eclipse.mat.snapshot.model.*;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Map;
 
@@ -46,11 +48,58 @@ public class HeapFunctions extends HeapFunctionsBase {
     long temp =0L;
     try{temp = Long.parseLong(toString(r));}
     catch (NumberFormatException e){
-      return "Wrong type";
+      return "";
     }
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
     return sdf.format(new Date(temp));
+  }
+  public static String convertLocalDate(Object r){
+    if(String.valueOf(LocalDate.class).equals("class "+getType(r))){
+      HeapReference ref = ensureHeapReference(r);
+      return ref.get("day")+"."+ref.get("month")+"."+ref.get("year");
+    }
+    else if(String.valueOf(LocalDateTime.class).equals("class "+getType(r))){
+      HeapReference ref = ensureHeapReference(r);
+      Object date = ref.get("date");
+      HeapReference dateRef = ensureHeapReference(date);
+      Object time = ref.get("time");
+      HeapReference timeRef = ensureHeapReference(time);
+      return dateRef.get("day")+"."+dateRef.get("month")+"."+dateRef.get("year")+" "+timeRef.get("hour")+":"+timeRef.get("minute")+":"+timeRef.get("second");
+    }
+    else{
+      return "Not a LocalDate object";
+    }
+  }
+
+  public static String substring(Object r, int beginIndex) {
+    if (r instanceof String) {
+      String temp = (String) r;
+      if (beginIndex > temp.length()) {
+        return temp.substring(beginIndex);
+      }
+    }
+    return "";
+  }
+
+  public static int lastIndexOf(Object string,Object character){
+    if(string instanceof String){
+      String temp = (String) string;
+      if(character instanceof String){
+        String searchChar = (String) character;
+        return temp.lastIndexOf(searchChar);
+      }
+    }
+    return -1;
+  }
+
+
+  public static long getStringLength(Object r){
+     if(r instanceof String){
+       String temp = (String) r;
+       return temp.length();
+     }
+     return -1;
   }
 
   @SuppressWarnings("unused")
